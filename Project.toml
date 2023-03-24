@@ -5,17 +5,22 @@ version = "0.1.0"
 
 [deps]
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Manifolds = "1cead3c2-87b3-11e9-0ccd-23c62b72b94e"
 ManifoldsBase = "3362f125-f0bb-47a3-aa74-596ffd7ef2fb"
 Manopt = "0fc0a36d-df90-57f3-8f93-d78a9fc72bb5"
 Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
 Optim = "429524aa-4258-5aef-a3af-852621145aeb"
 Requires = "ae029012-a4dd-5104-9daa-d747884805df"
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+StatsAPI = "82ae8749-77ed-4fe6-ae5f-f523153014b0"
 
 [compat]
 Manifolds = "0.8.43"
 ManifoldsBase = "0.13.29, 0.14"
+Optim = "1"
 RecursiveArrayTools = "2"
 Requires = "1"
+StatsAPI = "1"
 julia = "1.6"
 
 [extras]
