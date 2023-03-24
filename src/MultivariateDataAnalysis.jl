@@ -6,6 +6,9 @@ using LinearAlgebra
 using ManifoldsBase
 using Manifolds
 
+using Manopt
+using Optim
+
 using Requires
 
 using StatsAPI
