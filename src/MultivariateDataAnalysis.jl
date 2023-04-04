@@ -99,6 +99,8 @@ include("ica.jl")
 include("maxvar.jl")
 
 
+export MDASubspaceModel
 
+export fit
 
 end # module
