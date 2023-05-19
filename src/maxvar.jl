@@ -113,3 +113,11 @@ function fit(msm::MDASubspaceModel{<:Orthomax}, data)
 
     return MDASubspaceModelFit(msm, sol)
 end
+
+function predict(msf::MDASubspaceModelFit, x)
+    return msf.p' * x
+end
+
+function reconstruct(msf::MDASubspaceModelFit, y)
+    return msf.p * y
+end

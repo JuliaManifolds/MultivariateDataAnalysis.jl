@@ -40,4 +40,6 @@ end
     data_center = X .- mean(X; dims = 1)
     obj = MultivariateDataAnalysis.make_objective(model, data_center)
     @test obj(mf.p) < 160.4
+    @test predict(mf, X[1, :]) == mf.p' * X[1, :]
+    @test reconstruct(mf, [1, 2]) == mf.p * [1, 2]
 end

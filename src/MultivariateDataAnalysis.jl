@@ -12,7 +12,7 @@ using Optim
 using Requires
 
 using StatsAPI
-import StatsAPI: fit, predict, coef, dof, r2
+import StatsAPI: fit, predict, coef, dof, r2, reconstruct
 
 using Statistics
 
@@ -99,8 +99,8 @@ include("ica.jl")
 include("maxvar.jl")
 
 
-export MDASubspaceModel
+export MDASubspaceModel, MDASubspaceModelFit, MaxVar
 
-export fit
+export fit, predict, reconstruct
 
 end # module

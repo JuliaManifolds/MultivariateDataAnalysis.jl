@@ -40,7 +40,7 @@ end
     mf = fit(model, X)
     X_center = X .- mean(X; dims = 1)
     oo = MultivariateDataAnalysis.make_objective(model, X_center)
-    
+
     @test oo(mf.p) < 1e-10
 
 end

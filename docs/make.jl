@@ -6,7 +6,7 @@ makedocs(
     modules = [MultivariateDataAnalysis],
     authors = "Mateusz Baran, Ronny Bergmann, and contributors.",
     sitename = "MultivariateDataAnalysis.jl",
-    pages = ["Home" => "index.md", "Library" => "library.md"],
+    pages = ["Home" => "index.md", "Library" => "library.md", "Models" => "models.md"],
 )
 deploydocs(
     repo = "github.com/JuliaManifolds/MultivariateDataAnalysis.jl.git",
