@@ -7,10 +7,10 @@ function solve_problem_qn(M::AbstractManifold, oo, og, x0)
         StopWhenChangeLess(M, 1e-10)
 
     mgo = ManifoldGradientObjective(oo, og; evaluation = InplaceEvaluation())
-    cmgo = SimpleCacheObjective(M, mgo; p = x0)
+    cmgo = ManifoldCachedObjective(M, mgo; p = x0)
     mp = DefaultManoptProblem(M, cmgo)
 
-    qns = QuasiNewtonState(M, x0; stopping_criterion)
+    qns = QuasiNewtonState(M; p = x0, stopping_criterion)
     solret = solve!(mp, qns)
     #println(solret)
     sol = get_solver_return(solret)
@@ -24,7 +24,7 @@ function solve_problem_cpp(M::AbstractManifold, oo, op, x0)
         StopWhenChangeLess(M, 1e-10)
 
     mpo = ManifoldProximalMapObjective(oo, op; evaluation = InplaceEvaluation())
-    dmpo = SimpleCacheObjective(M, mpo; p = x0)
+    dmpo = ManifoldCachedObjective(M, mpo; p = x0)
     dmp = DefaultManoptProblem(M, dmpo)
     cpps = CyclicProximalPointState(
         M,

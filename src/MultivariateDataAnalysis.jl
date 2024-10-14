@@ -4,10 +4,14 @@ using Markdown: @doc_str
 using LinearAlgebra
 
 using ManifoldsBase
+using ManifoldsBase: get_parameter
 using Manifolds
 
 using Manopt
+using Manopt: get_solver_return
 using Optim
+
+using LRUCache
 
 using Requires
 
@@ -59,14 +63,14 @@ function (obj::MDASubgradient)(::AbstractManifold, X, p)
     return obj(X, p)
 end
 
-function get_num_components(::Grassmann{n,k}) where {n,k}
-    return k
+function get_num_components(M::Grassmann)
+    return get_parameter(M.size)[2]
 end
-function get_num_components(::Manifolds.Stiefel{n,k}) where {n,k}
-    return k
+function get_num_components(M::Manifolds.Stiefel)
+    return get_parameter(M.size)[2]
 end
-function get_num_components(::Oblique{n,k}) where {n,k}
-    return k
+function get_num_components(M::Oblique)
+    return get_parameter(M.size)[2]
 end
 
 function eigval_directions(data, num_components::Int)
