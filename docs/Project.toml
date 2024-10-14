@@ -5,7 +5,7 @@ ManifoldsBase = "3362f125-f0bb-47a3-aa74-596ffd7ef2fb"
 MultivariateDataAnalysis = "7ed5a180-dec1-4fe7-8c10-01540e2d7fe7"
 
 [compat]
-Documenter = "0.27"
-ManifoldsBase = "0.14"
-Manifolds = "0.8"
+Documenter = "1"
+ManifoldsBase = "0.15"
+Manifolds = "0.10"
 MultivariateDataAnalysis = "0.1"
