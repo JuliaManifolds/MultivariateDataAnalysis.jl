@@ -38,15 +38,15 @@ function solve_problem_cpp(M::AbstractManifold, oo, op, x0)
     return sol
 end
 
-function solve_problem_subgradient(M::AbstractManifold, oo, og, x0)
-    stopping_criterion = StopAfterIteration(2000) | StopWhenChangeLess(M, 1e-10)
+function solve_problem_subgradient(M::AbstractManifold, oo, og, x0; max_iter::Int = 2000)
+    stopping_criterion = StopAfterIteration(max_iter) | StopWhenChangeLess(M, 1e-10)
     sgo = ManifoldSubgradientObjective(oo, og; evaluation = InplaceEvaluation())
     dmp = DefaultManoptProblem(M, sgo)
-    stepsize = DecreasingStepsize(; factor = 0.99)
+    stepsize = Manopt.DecreasingStepsize(M; factor = 0.99)
 
     sgs = SubGradientMethodState(
-        M,
-        x0;
+        M;
+        p = x0,
         stopping_criterion = stopping_criterion,
         stepsize = stepsize,
     )
