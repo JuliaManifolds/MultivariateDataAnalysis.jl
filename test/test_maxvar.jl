@@ -37,9 +37,10 @@ end
     M = Grassmann(m, k - 1)
     model = MDASubspaceModel(MultivariateDataAnalysis.MaxVar(), M)
     mf = fit(model, X)
-    data_center = X .- mean(X; dims = 1)
+    center = mean(X; dims = 1)
+    data_center = X .- center
     obj = MultivariateDataAnalysis.make_objective(model, data_center)
-    @test obj(mf.p) < 160.4
-    @test predict(mf, X[1, :]) == mf.p' * X[1, :]
-    @test reconstruct(mf, [1, 2]) == mf.p * [1, 2]
+    @test obj(mf.p[2]) < 160.4
+    @test predict(mf, X[1, :]) ≈ mf.p[2]' * (X[1, :] .- center)
+    @test reconstruct(mf, [1, 2]) == center .+ mf.p[2] * [1, 2]
 end

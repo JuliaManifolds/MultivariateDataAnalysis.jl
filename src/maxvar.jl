@@ -82,7 +82,8 @@ end
 function fit(msm::MDASubspaceModel{MaxVar}, data)
 
     # centering
-    data_center = data .- mean(data; dims = 1)
+    center = mean(data; dims = 1)
+    data_center = data .- center
     num_components = get_num_components(msm.M)
     oo = make_objective(msm, data_center)
     og = make_gradient(msm, data_center)
@@ -93,14 +94,15 @@ function fit(msm::MDASubspaceModel{MaxVar}, data)
     # Manopt.check_gradient(M, f, g, x0, rand(M; vector_at=x0); plot=true)
     sol = solve_problem_qn(msm.M, oo, og, x0)
 
-    return MDASubspaceModelFit(msm, sol)
+    return MDASubspaceModelFit(msm, (center, sol))
 end
 
 
 function fit(msm::MDASubspaceModel{<:Orthomax}, data)
 
     # centering
-    data_center = data .- mean(data; dims = 1)
+    center = mean(data; dims = 1)
+    data_center = data .- center
     num_components = get_num_components(msm.M)
     oo = make_objective(msm, data_center)
     og = make_gradient(msm, data_center)
@@ -111,13 +113,15 @@ function fit(msm::MDASubspaceModel{<:Orthomax}, data)
     # Manopt.check_gradient(M, f, g, x0, rand(M; vector_at=x0); plot=true)
     sol = solve_problem_qn(msm.M, oo, og, x0)
 
-    return MDASubspaceModelFit(msm, sol)
+    return MDASubspaceModelFit(msm, (center, sol))
 end
 
 function predict(msf::MDASubspaceModelFit, x)
-    return msf.p' * x
+    center, rot = msf.p
+    return rot' * (x .- center)
 end
 
 function reconstruct(msf::MDASubspaceModelFit, y)
-    return msf.p * y
+    center, rot = msf.p
+    return center .+ rot * y
 end
