@@ -20,6 +20,8 @@ import StatsAPI: fit, predict, coef, dof, r2, reconstruct
 
 using Statistics
 
+using RecursiveArrayTools
+
 abstract type MDAModelType end
 
 
@@ -101,6 +103,9 @@ include("solvers.jl")
 include("clf.jl")
 include("ica.jl")
 include("maxvar.jl")
+#include("SPCA.jl")
+#include("SPCA copy.jl")
+#include("SPCA copy 1.jl")
 
 
 export MDASubspaceModel, MDASubspaceModelFit, MaxVar
