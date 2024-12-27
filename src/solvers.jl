@@ -1,8 +1,8 @@
 
 
-function solve_problem_qn(M::AbstractManifold, oo, og, x0)
+function solve_problem_qn(M::AbstractManifold, oo, og, x0; max_iter::Int = 100)
     stopping_criterion =
-        StopAfterIteration(100) |
+        StopAfterIteration(max_iter) |
         StopWhenGradientNormLess(1e-6) |
         StopWhenChangeLess(M, 1e-10)
 
@@ -17,9 +17,9 @@ function solve_problem_qn(M::AbstractManifold, oo, og, x0)
     return sol
 end
 
-function solve_problem_cpp(M::AbstractManifold, oo, op, x0)
+function solve_problem_cpp(M::AbstractManifold, oo, op, x0; max_iter::Int = 100)
     stopping_criterion =
-        StopAfterIteration(100) |
+        StopAfterIteration(max_iter) |
         StopWhenGradientNormLess(1e-6) |
         StopWhenChangeLess(M, 1e-10)
 
